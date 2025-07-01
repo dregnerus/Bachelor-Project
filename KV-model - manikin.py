@@ -3,12 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-# --- Kelvin–Voigt model ---
+# Kelvin–Voigt model
 def kelvin_voigt(x, k, c):
     depth, velocity = x
     return k * depth + c * velocity
 
-# --- Fit function for one file ---
+# Fitting function for one file
 def fit_kv_model(file_path, label, color, depth_range=(27, 32)):
     df = pd.read_csv(file_path)
     df_layer = df[(df["depth_mm"] >= depth_range[0]) & (df["depth_mm"] <= depth_range[1])]
@@ -30,18 +30,17 @@ def fit_kv_model(file_path, label, color, depth_range=(27, 32)):
         "color": color
     }
 
-# --- File paths for all groups ---
+# File paths for all velocity groups
 fast_path = r"C:\Users\Lenovo X1 Carbon\OneDrive\Documents\Doutsen\Bachelor project\Results experiment\All data\Fast_group_avg.csv"
 moderate_path = r"C:\Users\Lenovo X1 Carbon\OneDrive\Documents\Doutsen\Bachelor project\Results experiment\All data\Moderate_group_avg.csv"
 slow_path = r"C:\Users\Lenovo X1 Carbon\OneDrive\Documents\Doutsen\Bachelor project\Results experiment\All data\Slow_group_avg.csv"
 
-# --- Fit all models ---
-# --- Fit all models for interspinous ligament (6–27 mm) ---
+# Fiting all models for selected tissue layer (e.g. 0–6 mm), depth values were determined previously
 fast_result = fit_kv_model(fast_path, "Fast", "green")
 moderate_result = fit_kv_model(moderate_path, "Moderate", "red")
 slow_result = fit_kv_model(slow_path, "Slow", "blue")
 
-# --- Plot all together ---
+# Plotting the model for all velocity groups for the selected region
 plt.figure(figsize=(10, 5))
 for result in [fast_result, moderate_result, slow_result]:
     plt.plot(result["depth"], result["force"], '.', color=result["color"], alpha=0.5, label=f"{result['label']} Data")
