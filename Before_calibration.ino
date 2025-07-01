@@ -7,7 +7,6 @@ void setup() {
   scale.begin(8, 7);
   delay(1000);
   scale.tare(); // Zero the sensor with no weight
-  Serial.println("Start placing weights...");
 }
 
 void loop() {
