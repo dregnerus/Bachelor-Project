@@ -1,8 +1,8 @@
 import serial
 import time
 
-# Set your COM port and baud rate (match Arduino)
-ser = serial.Serial('COM10', 38400)  # Replace 'COM3' with your port
+# Seting the COM port and baud rate (should match with the Arduino)
+ser = serial.Serial('COM10', 38400)
 filename = "force_data.csv"
 
 with open(filename, 'w') as f:
