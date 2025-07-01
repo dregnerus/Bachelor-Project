@@ -12,7 +12,7 @@ df = pd.read_csv(csv_path, header=None, skiprows=1)
 # Only keeping data starting from needle insertion (row 103 onward, differs per trial)
 df_tail = df.iloc[103:].copy().reset_index(drop=True)
 
-# Taking that row as t0 and cerverting to seconds
+# Taking that row as t0 and converting to seconds
 t0 = df_tail.iat[0, 0]
 df_tail['time_s'] = (df_tail[0] - t0) / 1000.0
 
